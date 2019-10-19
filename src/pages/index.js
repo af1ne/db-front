@@ -1,21 +1,65 @@
-import React from "react"
-import { Link } from "gatsby"
+import React from "react";
+import { graphql } from "gatsby";
+import styled from 'styled-components';
+import { Title1, Title2 } from '../components/StyledComponents';
+import Image from "../components/image";
+import Layout from "../components/layout";
 
-import Layout from "../components/layout"
-import Image from "../components/image"
-import SEO from "../components/seo"
+const GlobalContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+`;
 
-const IndexPage = () => (
+const LeftContainer = styled.div`
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+  padding-top: 10vh;
+  padding-bottom: 5vh;
+  padding-right: 4em;
+  width: 50vw;
+`;
+
+const RightContener = styled.div`
+  width: 50vw;
+`;
+
+
+const IndexPage = ({ data }) => (
   <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
+    <GlobalContainer>
+      <LeftContainer>
+        <Title1>
+          Delphine Brunet <br/>
+          Développeuse Javascript React / Node.Js
+        </Title1>
+        <Title2>Ecologeek <br/> par nature</Title2>
+      </LeftContainer>
+      <RightContener>
+        <Image/>
+      </RightContener>
+    </GlobalContainer>
   </Layout>
-)
+);
 
-export default IndexPage
+export default IndexPage;
+
+export const pageQuery = graphql`
+  query IndexQuery {
+    allStrapiSection {
+      edges {
+        node {
+          id
+          title
+          subtitle
+          content
+          picture {
+            id
+          }
+          menu
+        }
+      }
+    }
+  }
+`;
