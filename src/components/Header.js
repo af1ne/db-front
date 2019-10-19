@@ -1,15 +1,19 @@
-import { Link } from "gatsby"
-import PropTypes from "prop-types"
-import React from "react"
+import { Link } from "gatsby";
+import PropTypes from "prop-types";
+// import styled from 'styled-components';
+// import { Title1, Title2 } from './StyledComponents';
+import React from "react";
+
+// import BurgerMenu from "./BurgerMenu";
+
 
 const Header = ({ siteTitle }) => (
   <header
     style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
+      background: `red`,
     }}
   >
-    <div
+        <div
       style={{
         margin: `0 auto`,
         maxWidth: 960,
@@ -28,15 +32,18 @@ const Header = ({ siteTitle }) => (
         </Link>
       </h1>
     </div>
+    
+      
+    
   </header>
-)
+);
 
 Header.propTypes = {
   siteTitle: PropTypes.string,
-}
+};
 
 Header.defaultProps = {
   siteTitle: ``,
-}
+};
 
-export default Header
+export default Header;
