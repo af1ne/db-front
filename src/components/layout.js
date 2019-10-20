@@ -9,23 +9,27 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useStaticQuery, graphql } from "gatsby";
 import styled from 'styled-components';
-import { colors } from './StyledComponents';
+import { colors, mobileThresholdPixels } from './StyledComponents';
 
 
 import BackgroundImage from 'gatsby-background-image';
 import BurgerMenu from "./BurgerMenu";
 import "./layout.css";
 
+const Main = styled.main`
+  margin: auto;
+  justify-content: space-between;
+`;
+
 const StyledBackgroundImage = styled(BackgroundImage)`
   width: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-`;
 
-const Main = styled.main`
-  margin: auto;
-  justify-content: space-between;
+  @media (max-width: ${mobileThresholdPixels}) {
+    height: auto;
+  }
 `;
 
 const Layout = ({ children }) => {
