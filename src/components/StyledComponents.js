@@ -22,9 +22,13 @@ export const fontSizes = {
 export const Title1 = styled.h1`
   font-family: 'Overlock';
   color: ${colors.white};
-  text-transform: capitalize;
   text-align: right;
-  font-size: ${fontSizes.m};
+  font-size: ${fontSizes.s};
+
+  @media (max-width: ${mobileThresholdPixels}) {
+    font-size: ${fontSizes.xs};
+    line-height: 1.5;
+  }
 `;
 
 export const Title2 = styled.h2`
@@ -35,6 +39,7 @@ export const Title2 = styled.h2`
 
 
   @media (max-width: ${mobileThresholdPixels}) {
-    font-size: ${fontSizes.m};
+    font-size: ${fontSizes.s};
+    text-align: left;
   }
 `;
