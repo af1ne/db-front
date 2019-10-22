@@ -43,3 +43,31 @@ export const Title2 = styled.h2`
     text-align: left;
   }
 `;
+export const GlobalContainer = styled.div`
+display: flex;
+flex-direction: row;
+height: 100vh;
+
+@media (max-width: ${mobileThresholdPixels}) {
+  display: flex;
+  flex-direction: column;
+
+}
+`;
+
+export const GreenContainer = styled.div`
+display: flex;
+flex-direction: column-reverse;
+justify-content: space-between;
+padding-top: 10vh;
+padding-bottom: 5vh;
+padding-right: 4em;
+width: 50vw;
+
+@media (max-width: ${mobileThresholdPixels}) {
+  width: 100vw;
+  padding-top: 3vh;
+  padding-bottom: 0;
+  padding-left: 1em;
+}
+`;

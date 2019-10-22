@@ -4,8 +4,9 @@ import Layout from "../components/layout";
 import GreenTitle from '../components/GreenTitle';
 import Identity from '../components/Identity';
 import isMobile from '../services/isMobile';
+import Portrait from '../components/Portrait';
 
-const Portfolio = ({ data }) => (
+const About = ({ data }) => (
   <Layout>
     <GlobalContainer>
       <GreenContainer>
@@ -16,11 +17,12 @@ const Portfolio = ({ data }) => (
           )
         }
         <GreenTitle
-          firstLine="Portfolio "
+          firstLine="A propos "
         />
       </GreenContainer>
+      <Portrait/>
     </GlobalContainer>
   </Layout>
 );
 
-export default Portfolio;
+export default About;

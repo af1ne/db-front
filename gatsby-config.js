@@ -3,14 +3,44 @@ module.exports = {
     title: `Delphine Brunet Développeuse web et webmobile React / Node.js`,
     description: `Site de mes réalisations : ma vie, mon oeuvre !`,
     author: `Delphine BRUNET, alias af1ne`,
+    menuLinks:[
+      {
+         name:'home',
+         link:'/'
+      },
+      {
+         name:'portfolio',
+         link:'/portfolio'
+      },
+      {
+        name:'curriculum-vitae',
+        link:'/cv'
+      },
+     {
+        name:'a propos',
+        link:'/a-propos'
+      },
+      {
+        name:'contact',
+        link:'/contact'
+      }
+    ]
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-modal-routing`,
+    'gatsby-theme-sidebar',
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
         path: `${__dirname}/src/images`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-styled-components`,
+      options: {
+        // Add any options here
       },
     },
     {

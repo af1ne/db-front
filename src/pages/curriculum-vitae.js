@@ -5,22 +5,24 @@ import GreenTitle from '../components/GreenTitle';
 import Identity from '../components/Identity';
 import isMobile from '../services/isMobile';
 
-const Portfolio = ({ data }) => (
+const CurriculumVitae = ({ data }) => (
   <Layout>
     <GlobalContainer>
       <GreenContainer>
         {isMobile()
           ? "" 
           : (
-          <Identity />
+          <Identity/>
           )
         }
         <GreenTitle
-          firstLine="Portfolio "
+          firstLine="Curriculum"
+          secondLine="vitae"
         />
       </GreenContainer>
+
     </GlobalContainer>
   </Layout>
 );
 
-export default Portfolio;
+export default CurriculumVitae;
