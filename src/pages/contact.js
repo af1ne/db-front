@@ -4,23 +4,26 @@ import Layout from "../components/layout";
 import GreenTitle from '../components/GreenTitle';
 import Identity from '../components/Identity';
 import isMobile from '../services/isMobile';
+import Portrait from '../components/Portrait';
 
-const Portfolio = ({ data }) => (
+const Contact = ({ data }) => (
   <Layout>
     <GlobalContainer>
       <GreenContainer>
         {isMobile()
           ? "" 
           : (
-          <Identity />
+          <Identity contact/>
           )
         }
         <GreenTitle
-          firstLine="Portfolio "
+          firstLine="Keep in"
+          secondLine="touch"
         />
       </GreenContainer>
+      <Portrait/>
     </GlobalContainer>
   </Layout>
 );
 
-export default Portfolio;
+export default Contact;

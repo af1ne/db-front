@@ -4,7 +4,6 @@ import { HamburgerSpring } from 'react-animated-burgers';
 import styled from 'styled-components';
 import { mobileThresholdPixels, colors } from './StyledComponents';
 
-
 const Burger = styled.div`
   position: fixed;
   top: 1vh;
@@ -18,25 +17,27 @@ const Burger = styled.div`
   }
 `;
 
-const BurgerMenu = ({ onClick, isOpen }) => (
+const MenuBurger = ({ openning, isOpen }) => (
   <Burger>
-    <HamburgerSpring
-      isActive={isOpen}
-      toggleButton={onClick}
-      barColor={colors.green}
-      buttonWidth={30}
-    />
+      <HamburgerSpring
+        isActive={isOpen}
+        toggleButton={openning()}
+        barColor={colors.green}
+        buttonWidth={30}
+      />
   </Burger>
 );
 
-BurgerMenu.propTypes = {
-  onClick: PropTypes.func,
+MenuBurger.propTypes = {
+  openning: PropTypes.func,
   isOpen: PropTypes.bool,
+  // isClose: PropTypes.bool,
 };
 
-BurgerMenu.defaultProps = {
-  onClick() { },
+MenuBurger.defaultProps = {
+  openning() { },
   isOpen: false,
+  // isClose: true,
 };
 
-export default BurgerMenu;
+export default MenuBurger;

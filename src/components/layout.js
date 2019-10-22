@@ -7,18 +7,20 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import { useStaticQuery, graphql } from "gatsby";
+import { useStaticQuery, graphql, Link, navigate } from "gatsby";
 import styled from 'styled-components';
 import { colors, mobileThresholdPixels } from './StyledComponents';
 
 
 import BackgroundImage from 'gatsby-background-image';
-import BurgerMenu from "./BurgerMenu";
+import MenuList from './MenuList';
+
 import "./layout.css";
 
 const Main = styled.main`
   margin: auto;
   justify-content: space-between;
+  height: 100vh;
 `;
 
 const StyledBackgroundImage = styled(BackgroundImage)`
@@ -30,6 +32,11 @@ const StyledBackgroundImage = styled(BackgroundImage)`
   @media (max-width: ${mobileThresholdPixels}) {
     height: auto;
   }
+`;
+
+const Nav = styled.nav`
+  position: fixed;
+  z-index: 2;
 `;
 
 const Layout = ({ children }) => {
@@ -53,9 +60,9 @@ const Layout = ({ children }) => {
             fluid={data.desktop.childImageSharp.fluid}
             backgroundColor={colors.green}
           >
-          <nav> 
-            <BurgerMenu/>
-          </nav>
+          <Nav>
+            <MenuList />
+          </Nav>
           {children}
         </StyledBackgroundImage>
       </Main>
