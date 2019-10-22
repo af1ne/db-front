@@ -35,7 +35,7 @@ export const Title2 = styled.h2`
   font-family: 'Aclonica';
   color: ${colors.green};
   text-align: right;
-  font-size: ${fontSizes.xl};
+  font-size: ${fontSizes.l};
 
 
   @media (max-width: ${mobileThresholdPixels}) {
@@ -61,7 +61,8 @@ flex-direction: column-reverse;
 justify-content: space-between;
 padding-top: 10vh;
 padding-bottom: 5vh;
-padding-right: 4em;
+padding-right: 3em;
+padding-left: 3em;
 width: 50vw;
 
 @media (max-width: ${mobileThresholdPixels}) {

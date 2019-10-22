@@ -5,10 +5,11 @@ import GreenTitle from '../components/GreenTitle';
 import Identity from '../components/Identity';
 import isMobile from '../services/isMobile';
 import Portrait from '../components/Portrait';
-
+import ContactForm from '../components/ContactForm';
 const Contact = ({ data }) => (
   <Layout>
     <GlobalContainer>
+      
       <GreenContainer>
         {isMobile()
           ? "" 
@@ -16,10 +17,12 @@ const Contact = ({ data }) => (
           <Identity contact/>
           )
         }
+        <ContactForm />
         <GreenTitle
-          firstLine="Keep in"
-          secondLine="touch"
+          firstLine="Keep in touch"
+          secondLine="..."
         />
+        
       </GreenContainer>
       <Portrait/>
     </GlobalContainer>
