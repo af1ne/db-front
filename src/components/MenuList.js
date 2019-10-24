@@ -1,50 +1,73 @@
-import React from "react";
+import React from 'react';
 import { Link } from "gatsby";
 import styled from 'styled-components';
+import { bool } from 'prop-types';
 import { colors, fontSizes, mobileThresholdPixels } from './StyledComponents';
 
-const MenuContainer = styled.div`
-  margin-right: 0.5vw;
-  margin-left: 90vw;
-  margin-top: 2vh;
-  color: ${colors.green};
-  background-color: none;
- 
+export const StyledMenu = styled.nav`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background: ${colors.transparent};
+  height: 100vh;
+  text-align: right;
+  padding: 1.5rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transition: transform 0.3s ease-in-out;
+  transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(100%)'};
+  z-index: 90;  
+
   @media (max-width: ${mobileThresholdPixels}) {
-    margin-right: 1vw;
-    margin-left: 70vw;
+    width: 100%;
+    background: black;
+  }
+
+  & ul {
+    font-family: 'Overlock';
+    font-size: ${fontSizes.xs};
+    padding: 1rem 0;
+    margin-top: 7vh;
+    font-weight: bold;
+    letter-spacing: 0.5rem;
+    text-decoration: none;
+    list-style-type: none;
+  }
+
+  li {
+    @media (max-width: ${mobileThresholdPixels}) {
+      margin-bottom: 6vh;
+    }
   }
 `;
 
-const Li = styled.li`
-  list-style: none;
-  text-align : right;
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: ${colors.green};
+  transition: color 0.2s linear;
+
+  &:hover {
+    color: ${colors.purple};
+  }
 `;
 
-const unactiveLink = {
-  color: colors.green,
-  fontSize: fontSizes.xs,
-  textDecoration: 'none',
-  fontFamily: 'Overlock',
-  lineHeight: '1em',
+const MenuList = ({ open }) => {
+  return (
+    <StyledMenu open={open}>
+      <ul>
+        <li><StyledLink to="/" >Home</StyledLink></li>
+        <li><StyledLink to="/portfolio/" >Portfolio</StyledLink></li>
+        <li><StyledLink to="/curriculum-vitae/" >Curriculum vitae</StyledLink></li>
+        <li><StyledLink to="/a-propos/" >A propos</StyledLink></li>
+        <li><StyledLink to="/contact/" >Contact</StyledLink></li>
+      </ul>
+    </StyledMenu>
+  )
 };
 
-const activeLink = {
-  ...unactiveLink,
-  color: colors.green,
-  textDecoration: 'underline',
-};
-
-const MenuList = () => (
-  <MenuContainer>
-    <ul>
-      <Li><Link to="/" style={unactiveLink} activeStyle={activeLink}>Home</Link></Li>
-      <Li><Link to="/portfolio/" style={unactiveLink} activeStyle={activeLink}>Portfolio</Link></Li>
-      <Li><Link to="/curriculum-vitae/" style={unactiveLink} activeStyle={activeLink}>Curriculum vitae</Link></Li>
-      <Li><Link to="/a-propos/" style={unactiveLink} activeStyle={activeLink}>A propos</Link></Li>
-      <Li><Link to="/contact/" style={unactiveLink} activeStyle={activeLink}>Contact</Link></Li>
-    </ul>
-  </MenuContainer>
-);
+MenuList.propTypes = {
+  open: bool.isRequired,
+}
 
 export default MenuList;

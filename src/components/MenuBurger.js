@@ -1,43 +1,65 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { HamburgerSpring } from 'react-animated-burgers';
+import { bool, func } from 'prop-types';
 import styled from 'styled-components';
-import { mobileThresholdPixels, colors } from './StyledComponents';
+import { colors } from './StyledComponents';
 
-const Burger = styled.div`
-  position: fixed;
-  top: 1vh;
-  left: 95vw;
-  border-radius: 1rem;
+const StyledBurger = styled.button`
+  position: absolute;
+  top: 5%;
+  right: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 2rem;
+  height: 2rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
   z-index: 100;
-
-  @media (max-width: ${mobileThresholdPixels}) {
-    left: 83vw;
-    margin-right: 2vw;
+  
+  &:focus {
+    outline: none;
   }
+  
+  div {
+    width: 2rem;
+    height: 0.25rem;
+    background: ${colors.green};
+    border-radius: 10px;
+    transition: all 0.3s linear;
+    position: relative;
+    transform-origin: 1px;
+
+    :first-child {
+      transform: ${({ open }) => open ? 'rotate(45deg)' : 'rotate(0)'};
+    }
+  
+    :nth-child(2) {
+      opacity: ${({ open }) => open ? '0' : '1'};
+      transform: ${({ open }) => open ? 'translateX(20px)' : 'translateX(0)'};
+    }
+  
+    :nth-child(3) {
+      transform: ${({ open }) => open ? 'rotate(-45deg)' : 'rotate(0)'};
+    }
+  }
+
 `;
 
-const MenuBurger = ({ openning, isOpen }) => (
-  <Burger>
-      <HamburgerSpring
-        isActive={isOpen}
-        toggleButton={openning()}
-        barColor={colors.green}
-        buttonWidth={30}
-      />
-  </Burger>
-);
+const MenuBurger = ({ open, setOpen }) => {
+  return (
+    <StyledBurger open={open} onClick={() => setOpen(!open)}>
+      <div />
+      <div />
+      <div />
+    </StyledBurger>
+  )
+}
 
 MenuBurger.propTypes = {
-  openning: PropTypes.func,
-  isOpen: PropTypes.bool,
-  // isClose: PropTypes.bool,
-};
-
-MenuBurger.defaultProps = {
-  openning() { },
-  isOpen: false,
-  // isClose: true,
+  open: bool.isRequired,
+  setOpen: func.isRequired,
 };
 
 export default MenuBurger;

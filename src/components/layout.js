@@ -5,14 +5,15 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react";
+import React, { useState, useRef } from "react";
 import PropTypes from "prop-types";
 import { useStaticQuery, graphql, Link, navigate } from "gatsby";
 import styled from 'styled-components';
 import { colors, mobileThresholdPixels } from './StyledComponents';
-
+import { useOnClickOutside } from '../hooks';
 
 import BackgroundImage from 'gatsby-background-image';
+import MenuBurger from './MenuBurger';
 import MenuList from './MenuList';
 
 import "./layout.css";
@@ -40,6 +41,9 @@ const Nav = styled.nav`
 `;
 
 const Layout = ({ children }) => {
+  const [open, setOpen] = useState(false);
+  const node = useRef(); 
+  useOnClickOutside(node, () => setOpen(false));
   const data = useStaticQuery(graphql`
     query {
       desktop: file(relativePath: {eq: "feuillage.png"}) {
@@ -59,10 +63,11 @@ const Layout = ({ children }) => {
             Tag="section"
             fluid={data.desktop.childImageSharp.fluid}
             backgroundColor={colors.green}
-          >
-          <Nav>
-            <MenuList />
-          </Nav>
+        >
+          <div ref={node}>
+            <MenuBurger open={open} setOpen={setOpen}/>
+            <MenuList open={open} setOpen={setOpen}/>
+          </div>
           {children}
         </StyledBackgroundImage>
       </Main>
