@@ -8,7 +8,11 @@ export const smallDesktopThresholdPixels = '1300px';
 export const colors = {
   white: '#FFFFFF',
   green: '#688F4E',
-  whiteTransparent: 'rgba(255, 255, 255, 0.10)',
+  purple: '#754E8F',
+  whiteTransparency: 'rgba(255, 255, 255, 0.30)',
+  greenTransparency: 'rgba(104, 143, 78, 0.5)',
+  purpleTranparency: 'rgba(117, 78, 143, 0.5)',
+  transparent: 'rgba(255, 255, 255, 0)',
 };
 
 export const fontSizes = {
@@ -70,5 +74,6 @@ width: 50vw;
   padding-top: 3vh;
   padding-bottom: 0;
   padding-left: 1em;
+  padding-right: 1em;
 }
 `;

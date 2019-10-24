@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { colors } from '../components/StyledComponents';
-
+import { mobileThresholdPixels } from './StyledComponents';
+import Button from './Button';
+import Input from './Input';
+import Textarea from './Textarea';
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
   width: 25vw;
   margin: auto;
-`;
+  align-items: center;
+  padding-bottom: 3vh;
 
-const Label = styled.label`
-  display: flex;
-  flex-direction: column;
-  width: 25vw;
-  margin-bottom: 1vh;
-  color: ${colors.green}
+  @media (max-width: ${mobileThresholdPixels}) {
+    width: 85vw;
+  }
 `;
 
 export default class ContactForm extends Component {
@@ -27,54 +27,56 @@ export default class ContactForm extends Component {
   }
 
   setInput = (event) => {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-    this.setState({ [name]: value });
+    this.setState({ [event.target.id]: event.target.value });
   };
+
+  submitForm = (event) => {
+    event.preventDefault();
+    console.log("envoyer le form");
+  }
 
   render() {
     console.log(this.state);
     const { name, mail, phone, message } = this.state;
     return (
-      <Form>
-        <Label>
-          Nom
-          <input
+      <Form onSubmit={this.submitForm}>
+
+          <Input
+            label="Nom *"
             type="text"
-            name="name"
+            id="name"
             value={name}
             onChange={this.setInput}
+            required
           />
-        </Label>
-        <Label>
-          Mail
-          <input
-            type="text"
-            name="mail"
+
+          <Input
+            label="Mail *"
+            type="mail"
+            id="mail"
             value={mail}
             onChange={this.setInput}
+            required
           />
-        </Label>
-        <Label>
-          Téléphone
-          <input
+
+          <Input
+            label="Téléphone"
             type="text"
-            name="phone"
+            id="phone"
             value={phone}
             onChange={this.setInput}
           />
-        </Label>
-        <Label>
-          Message
-          <input
+
+          <Textarea
+            label="Message *"
             type="text"
-            name="message"
+            id="message"
             value={message}
             onChange={this.setInput}
+            required
           />
-        </Label>
-        <button type="submit">Envoyer</button>
+        <Button type="submit" label="Envoyer" />
+
       </Form>
     );
   }
