@@ -29,7 +29,6 @@ module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-modal-routing`,
-    'gatsby-theme-sidebar',
     {
       resolve: `gatsby-source-filesystem`,
       options: {

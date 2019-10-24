@@ -1,9 +1,7 @@
 import React from "react";
 import { Link } from "gatsby";
 import styled from 'styled-components';
-import { colors, fontSizes } from './StyledComponents';
-
-
+import { colors, fontSizes, mobileThresholdPixels } from './StyledComponents';
 
 const MenuContainer = styled.div`
   margin-right: 0.5vw;
@@ -11,6 +9,10 @@ const MenuContainer = styled.div`
   margin-top: 2vh;
   color: ${colors.green};
   background-color: none;
+ 
+  @media (max-width: ${mobileThresholdPixels}) {
+
+  }
 `;
 
 const Li = styled.li`
