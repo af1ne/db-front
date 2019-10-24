@@ -32,11 +32,10 @@ export default class ContactForm extends Component {
 
   submitForm = (event) => {
     event.preventDefault();
-    console.log("envoyer le form");
+    // console.log("envoyer le form");
   }
 
   render() {
-    console.log(this.state);
     const { name, mail, phone, message } = this.state;
     return (
       <Form onSubmit={this.submitForm}>

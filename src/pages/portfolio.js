@@ -7,7 +7,7 @@ import isMobile from '../services/isMobile';
 
 const Portfolio = ({ data }) => (
   <Layout>
-    <GlobalContainer>
+    <GlobalContainer i={console.log('portfolio', data)}>
       <GreenContainer>
         {isMobile()
           ? "" 
@@ -18,9 +18,47 @@ const Portfolio = ({ data }) => (
         <GreenTitle
           firstLine="Portfolio "
         />
+        
       </GreenContainer>
     </GlobalContainer>
   </Layout>
 );
 
 export default Portfolio;
+
+export const projectQuery = graphql`
+  query PortfolioQuery {
+    allStrapiProject {
+      edges {
+        next {
+          id
+          title
+          subtitle
+          date
+          description
+          link
+          picture {
+            childImageSharp {
+              fixed(height: 10, grayscale: false) {
+                src
+                srcWebp
+              }
+            }
+          }
+          technos {
+            id
+            name
+            logo {
+              childImageSharp {
+                fixed(height: 10) {
+                  src
+                  srcWebp
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;

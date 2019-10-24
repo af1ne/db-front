@@ -49,7 +49,6 @@ const Portrait = ({ children }) => {
 
   return (
     <StyledBackgroundPortrait
-      Tag="portrait"
       fluid={data.desktop.childImageSharp.fluid}
       backgroundColor={colors.green}
     >

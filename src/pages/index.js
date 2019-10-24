@@ -9,7 +9,7 @@ import Portrait from '../components/Portrait';
 
 const IndexPage = ({ data }) => (
   <Layout>
-    <GlobalContainer>
+    <GlobalContainer i={console.log(data)}>
       <GreenContainer>
         {isMobile()
           ? "" 
@@ -28,22 +28,3 @@ const IndexPage = ({ data }) => (
 );
 
 export default IndexPage;
-
-export const pageQuery = graphql`
-  query IndexQuery {
-    allStrapiSection {
-      edges {
-        node {
-          id
-          title
-          subtitle
-          content
-          picture {
-            id
-          }
-          menu
-        }
-      }
-    }
-  }
-`;

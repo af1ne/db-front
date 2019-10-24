@@ -11,7 +11,8 @@ const MenuContainer = styled.div`
   background-color: none;
  
   @media (max-width: ${mobileThresholdPixels}) {
-
+    margin-right: 1vw;
+    margin-left: 70vw;
   }
 `;
 
