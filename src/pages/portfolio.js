@@ -8,34 +8,39 @@ import ProjectsGalerie from '../components/ProjectsGalerie'
 import ProjectCardDetails from '../components/ProjectCardDetails';
 
 const Portfolio = ({ data }) => {
-  const [selectedProject, setSelectedProject] = useState("");
+  const [selectedProject, setSelectedProject] = useState(null);
+  const selectedData = data.allStrapiProject.edges.filter(project => selectedProject && project.node.id === selectedProject)
+  const dataToRead = selectedData[0];
   return (
     <Layout>
       <GlobalContainer>
         <GreenContainer>
+          
           {isMobile()
             ? "" 
             : (
             <Identity />
             )
           }
-          {data.allStrapiProject.edges.filter(projet => projet.id === selectedProject => (
+
+          {selectedProject && !isMobile() &&
             <ProjectCardDetails
-              i={console.log(projet)}
-              title="Titre"
-              url="https://reactjs.org/docs/hooks-state.html"
-              description="Lorem ipsum"
+              title={dataToRead.node.title}
+              url={dataToRead.node.url}
+              description={dataToRead.node.description}
+              technos={dataToRead.node.technos}
             />
-          ))}
+          }
+
           <GreenTitle
             firstLine="Portfolio "
           />
         </GreenContainer>
         <ProjectsGalerie 
-          // i={console.log(data.allStrapiProject.edges)}
           datas={data.allStrapiProject.edges}
           setSelectedProject={(id) => setSelectedProject(id)}
-          // i={console.log(selectedProject)}
+          selectedProject={selectedProject}
+          dataToRead={dataToRead}
         />
       </GlobalContainer>
     </Layout>
@@ -62,9 +67,8 @@ export const projectQuery = graphql`
               absolutePath
               relativePath
               childImageSharp {
-                fixed(quality: 90, grayscale: false, height: 10) {
-                  src
-                  srcWebp
+                fixed(quality: 90, height: 40) {
+                  ...GatsbyImageSharpFixed
                 }
               }
               relativeDirectory
@@ -72,7 +76,7 @@ export const projectQuery = graphql`
           }
           picture {
             childImageSharp {
-              fluid(quality: 90, grayscale: false) {
+              fluid(quality: 90, maxWidth: 500) {
                 ...GatsbyImageSharpFluid
               }
             }

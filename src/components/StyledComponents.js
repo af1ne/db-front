@@ -17,11 +17,11 @@ export const colors = {
 };
 
 export const fontSizes = {
-  xs: '0.9em',
-  s: '2em',
-  m: '3em',
-  l: '4em',
-  xl: '6em',
+  xs: '1em',
+  s: '1.5em',
+  m: '2em',
+  l: '3em',
+  xl: '4em',
 };
 
 export const Title1 = styled.h1`
@@ -40,8 +40,8 @@ export const Title2 = styled.h2`
   font-family: 'Aclonica';
   color: ${colors.green};
   text-align: right;
-  font-size: ${fontSizes.l};
-
+  font-size: ${fontSizes.xl};
+  
 
   @media (max-width: ${mobileThresholdPixels}) {
     font-size: ${fontSizes.s};
@@ -83,6 +83,7 @@ export const A = styled.a`
   font-size: ${fontSizes.xs};
   text-decoration: none;
   color: ${colors.green};
+  transition: .3s ease-in-out;
 
   &:hover,
   &:active {
