@@ -5,9 +5,9 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React, { useState, useRef } from "react";
-import PropTypes from "prop-types";
-import { useStaticQuery, graphql, Link, navigate } from "gatsby";
+import React, { useState, useRef } from 'react';
+import PropTypes from 'prop-types';
+import { useStaticQuery, graphql } from 'gatsby';
 import styled from 'styled-components';
 import { colors, mobileThresholdPixels } from './StyledComponents';
 import { useOnClickOutside } from '../hooks';
@@ -16,12 +16,12 @@ import BackgroundImage from 'gatsby-background-image';
 import MenuBurger from './MenuBurger';
 import MenuList from './MenuList';
 
-import "./layout.css";
+import './layout.css';
 
 const Main = styled.main`
   margin: auto;
   justify-content: space-between;
-  height: 100vh;
+  overflow: hidden;
 `;
 
 const StyledBackgroundImage = styled(BackgroundImage)`
@@ -33,11 +33,6 @@ const StyledBackgroundImage = styled(BackgroundImage)`
   @media (max-width: ${mobileThresholdPixels}) {
     height: auto;
   }
-`;
-
-const Nav = styled.nav`
-  position: fixed;
-  z-index: 2;
 `;
 
 const Layout = ({ children }) => {

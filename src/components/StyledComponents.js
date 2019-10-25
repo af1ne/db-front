@@ -10,6 +10,7 @@ export const colors = {
   green: '#688F4E',
   purple: '#754E8F',
   whiteTransparency: 'rgba(255, 255, 255, 0.30)',
+  blackTransparency: 'rgba(0, 0, 0, 0.40)',
   greenTransparency: 'rgba(104, 143, 78, 0.5)',
   purpleTranparency: 'rgba(117, 78, 143, 0.5)',
   transparent: 'rgba(255, 255, 255, 0)',
@@ -76,4 +77,17 @@ width: 50vw;
   padding-left: 1em;
   padding-right: 1em;
 }
+`;
+
+export const A = styled.a`
+  font-size: ${fontSizes.xs};
+  text-decoration: none;
+  color: ${colors.green};
+
+  &:hover,
+  &:active {
+    color: ${colors.purple};
+  }
+
+  
 `;
