@@ -9,7 +9,7 @@ import Portrait from '../components/Portrait';
 
 const IndexPage = ({ data }) => (
   <Layout>
-    <GlobalContainer i={console.log(data)}>
+    <GlobalContainer>
       <GreenContainer>
         {isMobile()
           ? "" 

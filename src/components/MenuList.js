@@ -9,7 +9,7 @@ export const StyledMenu = styled.nav`
   flex-direction: column;
   justify-content: flex-start;
   background: ${colors.transparent};
-  height: 100vh;
+  height: 35vh;
   text-align: right;
   padding: 1.5rem;
   position: absolute;
@@ -17,10 +17,11 @@ export const StyledMenu = styled.nav`
   right: 0;
   transition: transform 0.3s ease-in-out;
   transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(100%)'};
-  z-index: 90;  
+  z-index: 90; 
 
   @media (max-width: ${mobileThresholdPixels}) {
     width: 100%;
+    height: 100vh;
     background: black;
   }
 
@@ -28,6 +29,7 @@ export const StyledMenu = styled.nav`
     font-family: 'Overlock';
     font-size: ${fontSizes.xs};
     padding: 1rem 0;
+    margin-right: -0.5rem;
     margin-top: 7vh;
     font-weight: bold;
     letter-spacing: 0.5rem;

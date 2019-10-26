@@ -10,17 +10,18 @@ export const colors = {
   green: '#688F4E',
   purple: '#754E8F',
   whiteTransparency: 'rgba(255, 255, 255, 0.30)',
+  blackTransparency: 'rgba(0, 0, 0, 0.40)',
   greenTransparency: 'rgba(104, 143, 78, 0.5)',
   purpleTranparency: 'rgba(117, 78, 143, 0.5)',
   transparent: 'rgba(255, 255, 255, 0)',
 };
 
 export const fontSizes = {
-  xs: '0.9em',
-  s: '2em',
-  m: '3em',
-  l: '4em',
-  xl: '6em',
+  xs: '1em',
+  s: '1.5em',
+  m: '2em',
+  l: '3em',
+  xl: '4em',
 };
 
 export const Title1 = styled.h1`
@@ -39,8 +40,8 @@ export const Title2 = styled.h2`
   font-family: 'Aclonica';
   color: ${colors.green};
   text-align: right;
-  font-size: ${fontSizes.l};
-
+  font-size: ${fontSizes.xl};
+  
 
   @media (max-width: ${mobileThresholdPixels}) {
     font-size: ${fontSizes.s};
@@ -76,4 +77,18 @@ width: 50vw;
   padding-left: 1em;
   padding-right: 1em;
 }
+`;
+
+export const A = styled.a`
+  font-size: ${fontSizes.xs};
+  text-decoration: none;
+  color: ${colors.green};
+  transition: .3s ease-in-out;
+
+  &:hover,
+  &:active {
+    color: ${colors.purple};
+  }
+
+  
 `;

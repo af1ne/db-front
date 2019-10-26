@@ -6,7 +6,7 @@ import { colors } from './StyledComponents';
 const StyledBurger = styled.button`
   position: absolute;
   top: 5%;
-  right: 2rem;
+  right: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
