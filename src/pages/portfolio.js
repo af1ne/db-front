@@ -29,6 +29,7 @@ const Portfolio = ({ data }) => {
               url={dataToRead.node.url}
               description={dataToRead.node.description}
               technos={dataToRead.node.technos}
+              date={dataToRead.node.date}
             />
           }
 
@@ -58,7 +59,9 @@ export const projectQuery = graphql`
           title
           subtitle
           description
-          date
+          date(
+            formatString: "MMMM YYYY"
+            locale: "fr-FR")
           url
           technos {
             id
