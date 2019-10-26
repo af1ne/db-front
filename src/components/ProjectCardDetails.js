@@ -67,7 +67,7 @@ const Techno = styled.div`
 
 const ProjectCardDetails = ({ title, url, description, technos, date }) => ( 
     <CardContainer>
-      <TitleProject>{title} - {date}</TitleProject>
+      <TitleProject>{title}<br/>{date}</TitleProject>
         <UrlProject>
           <A
           href={url}
