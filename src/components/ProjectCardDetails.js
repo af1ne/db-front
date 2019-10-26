@@ -65,9 +65,9 @@ const Techno = styled.div`
   }
 `;
 
-const ProjectCardDetails = ({ title, url, description, technos }) => ( 
+const ProjectCardDetails = ({ title, url, description, technos, date }) => ( 
     <CardContainer>
-      <TitleProject>{title}</TitleProject>
+      <TitleProject>{title} - {date}</TitleProject>
         <UrlProject>
           <A
           href={url}
@@ -78,9 +78,9 @@ const ProjectCardDetails = ({ title, url, description, technos }) => (
           </A>
         </UrlProject>
         <DescriptionProject>{description}</DescriptionProject>
-        <TechnoContainer i={technos.map(techno => console.log(techno))}>
+        <TechnoContainer>
           {technos.map(techno => (
-            <Techno>
+            <Techno key={techno.id}>
               <Img
                 key={techno.id}
                 fixed={techno.logo.childImageSharp.fixed}
@@ -98,6 +98,7 @@ ProjectCardDetails.propTypes = {
   url: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   technos: PropTypes.array.isRequired,
+  date: PropTypes.string.isRequired,
 };
 
 

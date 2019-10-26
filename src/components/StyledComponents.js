@@ -88,7 +88,6 @@ export const A = styled.a`
   &:hover,
   &:active {
     color: ${colors.purple};
-  }
-
-  
+  } 
 `;
+
