@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Img from 'gatsby-image';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { colors, mobileThresholdPixels, Title2, fontSizes } from './StyledComponents';
+import { colors, mobileThresholdPixels, P } from './StyledComponents';
 import isMobile from '../services/isMobile';
 import ProjectCardDetails from './ProjectCardDetails';
 
@@ -64,11 +64,8 @@ const PictureContainer = styled.div`
 `;
 
 const NextProject = styled(PictureContainer)`
-  height: 15vh;
-  text-align: center;
-  line-height: 1;
-  vertical-align: middle;
-  padding-top: 7vh;
+  height: 20vh;
+  line-height: 20vh;
   cursor: help;
 `;
 
@@ -76,7 +73,7 @@ const ProjectsGalerie = ({ datas, setSelectedProject, selectedProject, dataToRea
   <ProjectsContainer>
     <ScrollingContainer>
       <NextProject>
-        <p>Mon prochain projet sera peut-être le vôtre...</p>
+        <P center>Mon prochain projet sera peut-être le vôtre...</P>
       </NextProject>
       {datas.map((data) =>
         <PictureContainer

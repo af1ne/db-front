@@ -2,8 +2,14 @@ import React from "react";
 import Img from 'gatsby-image';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { colors, mobileThresholdPixels, fontSizes, Title2, A } from './StyledComponents';
 import { FadeIn } from 'animate-css-styled-components';
+import { 
+  mobileThresholdPixels,
+  Title3,
+  Date,
+  Url,
+  P,
+  A } from './StyledComponents';
 
 const CardContainer = styled.div`
   width: 35vw;
@@ -15,33 +21,6 @@ const CardContainer = styled.div`
   @media (max-width: ${mobileThresholdPixels}) {
     width: 80vw;
     height: 30vh;
-  }
-`;
-
-const TitleProject = styled(Title2)`
-  font-size: ${fontSizes.m};
-
-  @media (max-width: ${mobileThresholdPixels}) {
-    font-size: ${fontSizes.s};
-  }
-`;
-
-const UrlProject = styled(Title2)`
-  font-size: ${fontSizes.xs};
-
-  @media (max-width: ${mobileThresholdPixels}) {
-    font-size: ${fontSizes.xs};
-  }
-`;
-
-const DescriptionProject = styled.p`
-  font-family: 'Overlock';
-  color: ${colors.white};
-  font-size: ${fontSizes.s};
-  text-align: right;
-
-  @media (max-width: ${mobileThresholdPixels}) {
-    font-size: ${fontSizes.xs};
   }
 `;
 
@@ -69,8 +48,11 @@ const Techno = styled.div`
 const ProjectCardDetails = ({ title, url, description, technos, date }) => ( 
     <FadeIn>
       <CardContainer>
-      <TitleProject>{title}<br/>{date}</TitleProject>
-        <UrlProject>
+      <Title3>
+        {title}
+        </Title3>
+        <Date>{date}</Date>
+        <Url>
           <A
           href={url}
           target="_blank"
@@ -78,8 +60,8 @@ const ProjectCardDetails = ({ title, url, description, technos, date }) => (
           >
           {url}
           </A>
-        </UrlProject>
-        <DescriptionProject>{description}</DescriptionProject>
+        </Url>
+        <P>{description}</P>
         <TechnoContainer>
           {technos.map(techno => (
             <Techno key={techno.id}>

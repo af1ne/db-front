@@ -24,8 +24,11 @@ export const fontSizes = {
   xl: '4em',
 };
 
+const greenFont = "Aclonica";
+const whiteFont = "Overlock";
+
 export const Title1 = styled.h1`
-  font-family: 'Overlock';
+  font-family: ${whiteFont};
   color: ${colors.white};
   text-align: right;
   font-size: ${fontSizes.s};
@@ -37,7 +40,7 @@ export const Title1 = styled.h1`
 `;
 
 export const Title2 = styled.h2`
-  font-family: 'Aclonica';
+  font-family: ${greenFont};
   color: ${colors.green};
   text-align: right;
   font-size: ${fontSizes.xl};
@@ -48,6 +51,66 @@ export const Title2 = styled.h2`
     text-align: left;
   }
 `;
+
+export const Title3 = styled.h3`
+  font-family: ${greenFont};
+  color: ${colors.green};
+  text-align: right;
+  font-size: ${fontSizes.m};
+  
+
+  @media (max-width: ${mobileThresholdPixels}) {
+    font-size: ${fontSizes.s};
+    text-align: left;
+  }
+`;
+export const Date = styled.p`
+  font-family: ${greenFont};
+  color: ${colors.green};
+  text-align: right;
+  font-size: ${fontSizes.s};
+  text-transform: capitalize;
+
+  @media (max-width: ${mobileThresholdPixels}) {
+    font-size: ${fontSizes.xs};
+    text-align: left;
+  }
+`;
+export const Url = styled.p`
+  font-family: ${greenFont};
+  color: ${colors.green};
+  text-align: right;
+  font-size: ${fontSizes.xs};
+
+  @media (max-width: ${mobileThresholdPixels}) {
+    font-size: ${fontSizes.xs};
+    text-align: left;
+  }
+`;
+
+export const A = styled.a`
+  font-size: ${fontSizes.xs};
+  text-decoration: none;
+  color: ${colors.green};
+  transition: .3s ease-in-out;
+
+  &:hover,
+  &:active {
+    color: ${colors.purple};
+  } 
+`;
+
+export const P = styled.p`
+  font-family: ${whiteFont};
+  color: ${colors.white};
+  font-size: ${fontSizes.s};
+  text-align: ${props => props.center ? 'center' : 'right'};
+
+  @media (max-width: ${mobileThresholdPixels}) {
+    font-size: ${fontSizes.xs};
+  }
+`;
+
 export const GlobalContainer = styled.div`
 display: flex;
 flex-direction: row;
@@ -78,16 +141,3 @@ width: 50vw;
   padding-right: 1em;
 }
 `;
-
-export const A = styled.a`
-  font-size: ${fontSizes.xs};
-  text-decoration: none;
-  color: ${colors.green};
-  transition: .3s ease-in-out;
-
-  &:hover,
-  &:active {
-    color: ${colors.purple};
-  } 
-`;
-
