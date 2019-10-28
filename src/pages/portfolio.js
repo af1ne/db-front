@@ -1,17 +1,91 @@
-import React from "react";
-import { Link } from "gatsby";
-// import styled from 'styled-components';
-import { Title1 } from '../components/StyledComponents';
+import React, { useState } from "react";
+import { GlobalContainer, GreenContainer } from '../components/StyledComponents';
 import Layout from "../components/layout";
-import SEO from "../components/seo";
+import GreenTitle from '../components/GreenTitle';
+import Identity from '../components/Identity';
+import isMobile from '../services/isMobile';
+import ProjectsGalerie from '../components/ProjectsGalerie'
+import ProjectCardDetails from '../components/ProjectCardDetails';
 
-const Portfolio = () => (
-  <Layout>
-    <SEO title="Portfolio Delphine Brunet, développeuse web et webmobile Javascript" />
-    <Title1>Portfolio</Title1>
-    <p>Welcome to page 2</p>
-    <Link to="/">Go back to the homepage</Link>
-  </Layout>
-);
+const Portfolio = ({ data }) => {
+  const [selectedProject, setSelectedProject] = useState(null);
+  const selectedData = data.allStrapiProject.edges.filter(project => selectedProject && project.node.id === selectedProject)
+  const dataToRead = selectedData[0];
+  return (
+    <Layout>
+      <GlobalContainer>
+        <GreenContainer>
+          
+          {isMobile()
+            ? "" 
+            : (
+            <Identity />
+            )
+          }
+
+          {selectedProject && !isMobile() &&
+            <ProjectCardDetails
+              title={dataToRead.node.title}
+              url={dataToRead.node.url}
+              description={dataToRead.node.description}
+              technos={dataToRead.node.technos}
+              date={dataToRead.node.date}
+            />
+          }
+
+          <GreenTitle
+            firstLine="Portfolio "
+          />
+        </GreenContainer>
+        <ProjectsGalerie 
+          datas={data.allStrapiProject.edges}
+          setSelectedProject={(id) => setSelectedProject(id)}
+          selectedProject={selectedProject}
+          dataToRead={dataToRead}
+        />
+      </GlobalContainer>
+    </Layout>
+  )
+};
 
 export default Portfolio;
+
+export const projectQuery = graphql`
+  query PortfolioQuery {
+    allStrapiProject {
+      edges {
+        node {
+          id
+          title
+          subtitle
+          description
+          date(
+            formatString: "MMMM YYYY"
+            locale: "fr-FR")
+          url
+          technos {
+            id
+            name
+            logo {
+              absolutePath
+              relativePath
+              childImageSharp {
+                fixed(quality: 90, height: 40) {
+                  ...GatsbyImageSharpFixed
+                }
+              }
+              relativeDirectory
+            }
+          }
+          picture {
+            childImageSharp {
+              fluid(quality: 90, maxWidth: 500) {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;

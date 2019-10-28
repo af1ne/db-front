@@ -6,11 +6,8 @@ import Identity from '../components/Identity';
 import isMobile from '../services/isMobile';
 import Portrait from '../components/Portrait';
 
-import SEO from "../components/seo";
-
-const NotFoundPage = () => (
+const About = ({ data }) => (
   <Layout>
-    <SEO title="404: Not found" />
     <GlobalContainer>
       <GreenContainer>
         {isMobile()
@@ -20,8 +17,7 @@ const NotFoundPage = () => (
           )
         }
         <GreenTitle
-          firstLine="404"
-          secondLine="Perdu !?"
+          firstLine="A propos "
         />
       </GreenContainer>
       <Portrait/>
@@ -29,4 +25,4 @@ const NotFoundPage = () => (
   </Layout>
 );
 
-export default NotFoundPage;
+export default About;

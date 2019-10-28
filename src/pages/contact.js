@@ -5,28 +5,29 @@ import GreenTitle from '../components/GreenTitle';
 import Identity from '../components/Identity';
 import isMobile from '../services/isMobile';
 import Portrait from '../components/Portrait';
+import ContactForm from '../components/ContactForm';
 
-import SEO from "../components/seo";
-
-const NotFoundPage = () => (
+const Contact = ({ data }) => (
   <Layout>
-    <SEO title="404: Not found" />
     <GlobalContainer>
+      
       <GreenContainer>
         {isMobile()
           ? "" 
           : (
-          <Identity />
+          <Identity contact/>
           )
         }
+        <ContactForm />
         <GreenTitle
-          firstLine="404"
-          secondLine="Perdu !?"
+          firstLine="Keep in touch"
+          secondLine="..."
         />
+        
       </GreenContainer>
       <Portrait/>
     </GlobalContainer>
   </Layout>
 );
 
-export default NotFoundPage;
+export default Contact;

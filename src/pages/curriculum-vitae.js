@@ -1,32 +1,41 @@
-import React from "react";
+import React from 'react';
 import { GlobalContainer, GreenContainer } from '../components/StyledComponents';
-import Layout from "../components/layout";
+import Layout from '../components/layout';
 import GreenTitle from '../components/GreenTitle';
 import Identity from '../components/Identity';
 import isMobile from '../services/isMobile';
-import Portrait from '../components/Portrait';
 
-import SEO from "../components/seo";
-
-const NotFoundPage = () => (
+const CurriculumVitae = ({ data }) => (
   <Layout>
-    <SEO title="404: Not found" />
     <GlobalContainer>
       <GreenContainer>
         {isMobile()
           ? "" 
           : (
-          <Identity />
+          <Identity/>
           )
         }
         <GreenTitle
-          firstLine="404"
-          secondLine="Perdu !?"
+          firstLine="Curriculum"
+          secondLine="vitae"
         />
       </GreenContainer>
-      <Portrait/>
+
     </GlobalContainer>
   </Layout>
 );
 
-export default NotFoundPage;
+export default CurriculumVitae;
+
+export const experienceQuery = graphql`
+  query cvQuery {
+    allStrapiExperience {
+      edges {
+        node {
+          id
+          job_title
+        }
+      }
+    }
+  }
+`;
