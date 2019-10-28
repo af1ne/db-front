@@ -40,10 +40,6 @@ const ScrollingContainer = styled.div`
   &::-webkit-scrollbar-corner {
     display: none;
   }
-  @media (max-width: ${mobileThresholdPixels}) {
-    width: 100vw;
-    height: 100vh;
-  }
 `;
 
 const PictureContainer = styled.div`
@@ -74,12 +70,6 @@ const NextProject = styled(PictureContainer)`
   vertical-align: middle;
   padding-top: 7vh;
   cursor: help;
-
-  @media (max-width: ${mobileThresholdPixels}) {
-    width: 80vw;
-    height: 10vh;
-    padding-top: 4vh;
-  }
 `;
 
 const ProjectsGalerie = ({ datas, setSelectedProject, selectedProject, dataToRead }) => (
@@ -88,6 +78,15 @@ const ProjectsGalerie = ({ datas, setSelectedProject, selectedProject, dataToRea
       <NextProject>
         <p>Mon prochain projet sera peut-être le vôtre...</p>
       </NextProject>
+      {datas.map((data) =>
+        <PictureContainer
+          key={data.node.id}
+          onClick={() => setSelectedProject(data.node.id)}
+        >
+          <Img fluid={data.node.picture.childImageSharp.fluid} />
+        </PictureContainer>
+      )}
+      <PictureContainer />
       {isMobile() && selectedProject &&
         <ProjectCardDetails
           title={dataToRead.node.title}
@@ -97,15 +96,6 @@ const ProjectsGalerie = ({ datas, setSelectedProject, selectedProject, dataToRea
           date={dataToRead.node.date}
         />
       }
-      {datas.map((data) =>
-        <PictureContainer
-          key={data.node.id}
-          onClick={() => setSelectedProject(data.node.id)}
-        >
-          <Img fluid={data.node.picture.childImageSharp.fluid} />
-        </PictureContainer>
-      )}
-
     </ScrollingContainer>
   </ProjectsContainer>
 );

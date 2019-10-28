@@ -3,6 +3,7 @@ import Img from 'gatsby-image';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { colors, mobileThresholdPixels, fontSizes, Title2, A } from './StyledComponents';
+import { FadeIn } from 'animate-css-styled-components';
 
 const CardContainer = styled.div`
   width: 35vw;
@@ -66,7 +67,8 @@ const Techno = styled.div`
 `;
 
 const ProjectCardDetails = ({ title, url, description, technos, date }) => ( 
-    <CardContainer>
+    <FadeIn>
+      <CardContainer>
       <TitleProject>{title}<br/>{date}</TitleProject>
         <UrlProject>
           <A
@@ -91,6 +93,7 @@ const ProjectCardDetails = ({ title, url, description, technos, date }) => (
           ))}
         </TechnoContainer>
     </CardContainer>
+  </FadeIn>
 );
 
 ProjectCardDetails.propTypes = {
@@ -100,6 +103,5 @@ ProjectCardDetails.propTypes = {
   technos: PropTypes.array.isRequired,
   date: PropTypes.string.isRequired,
 };
-
 
 export default ProjectCardDetails;

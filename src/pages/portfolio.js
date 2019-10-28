@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { GlobalContainer, GreenContainer } from '../components/StyledComponents';
+import { FadeInDown} from 'animate-css-styled-components';
 import Layout from "../components/layout";
 import GreenTitle from '../components/GreenTitle';
 import Identity from '../components/Identity';
 import isMobile from '../services/isMobile';
-import ProjectsGalerie from '../components/ProjectsGalerie'
+import ProjectsGalerie from '../components/ProjectsGalerie';
 import ProjectCardDetails from '../components/ProjectCardDetails';
 
 const Portfolio = ({ data }) => {
@@ -37,12 +38,14 @@ const Portfolio = ({ data }) => {
             firstLine="Portfolio "
           />
         </GreenContainer>
-        <ProjectsGalerie 
-          datas={data.allStrapiProject.edges}
-          setSelectedProject={(id) => setSelectedProject(id)}
-          selectedProject={selectedProject}
-          dataToRead={dataToRead}
-        />
+          <FadeInDown duration="2s">
+            <ProjectsGalerie 
+              datas={data.allStrapiProject.edges}
+              setSelectedProject={(id) => setSelectedProject(id)}
+              selectedProject={selectedProject}
+              dataToRead={dataToRead}
+              />
+          </FadeInDown>
       </GlobalContainer>
     </Layout>
   )
