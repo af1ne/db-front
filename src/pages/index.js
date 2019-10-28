@@ -6,6 +6,7 @@ import GreenTitle from '../components/GreenTitle';
 import Identity from '../components/Identity';
 import isMobile from '../services/isMobile';
 import Portrait from '../components/Portrait';
+import { FadeIn, FadeInRight } from 'animate-css-styled-components';
 
 const IndexPage = ({ data }) => (
   <Layout>
@@ -20,9 +21,12 @@ const IndexPage = ({ data }) => (
         <GreenTitle
           firstLine="Ecologeek "
           secondLine="par nature"
+          pageOrigin="IndexPage"
         />
       </GreenContainer>
-      <Portrait/>
+      <FadeInRight duration="2s">
+        <Portrait/>
+      </FadeInRight>
     </GlobalContainer>
   </Layout>
 );

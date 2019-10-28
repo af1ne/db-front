@@ -33,7 +33,7 @@ const StyledBackgroundPortrait = styled(BackgroundImage)`
   background-size: cover;
 `;
 
-const Portrait = ({ children }) => {
+const Portrait = ({ children, pageOrigin }) => {
 
   const data = useStaticQuery(graphql`
     query {

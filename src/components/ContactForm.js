@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { mobileThresholdPixels } from './StyledComponents';
+import { FadeIn } from 'animate-css-styled-components';
 import Button from './Button';
 import Input from './Input';
 import Textarea from './Textarea';
@@ -38,45 +39,47 @@ export default class ContactForm extends Component {
   render() {
     const { name, mail, phone, message } = this.state;
     return (
-      <Form onSubmit={this.submitForm}>
+      <FadeIn>
+        <Form onSubmit={this.submitForm}>
 
-          <Input
-            label="Nom *"
-            type="text"
-            id="name"
-            value={name}
-            onChange={this.setInput}
-            required
-          />
+            <Input
+              label="Nom *"
+              type="text"
+              id="name"
+              value={name}
+              onChange={this.setInput}
+              required
+            />
 
-          <Input
-            label="Mail *"
-            type="mail"
-            id="mail"
-            value={mail}
-            onChange={this.setInput}
-            required
-          />
+            <Input
+              label="Mail *"
+              type="mail"
+              id="mail"
+              value={mail}
+              onChange={this.setInput}
+              required
+            />
 
-          <Input
-            label="Téléphone"
-            type="text"
-            id="phone"
-            value={phone}
-            onChange={this.setInput}
-          />
+            <Input
+              label="Téléphone"
+              type="text"
+              id="phone"
+              value={phone}
+              onChange={this.setInput}
+            />
 
-          <Textarea
-            label="Message *"
-            type="text"
-            id="message"
-            value={message}
-            onChange={this.setInput}
-            required
-          />
-        <Button type="submit" label="Envoyer" />
+            <Textarea
+              label="Message *"
+              type="text"
+              id="message"
+              value={message}
+              onChange={this.setInput}
+              required
+            />
+          <Button type="submit" label="Envoyer" />
 
-      </Form>
+        </Form>
+      </FadeIn>
     );
   }
 }

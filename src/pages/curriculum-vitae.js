@@ -7,7 +7,7 @@ import isMobile from '../services/isMobile';
 
 const CurriculumVitae = ({ data }) => (
   <Layout>
-    <GlobalContainer>
+    <GlobalContainer i={console.log(data)}>
       <GreenContainer>
         {isMobile()
           ? "" 
@@ -30,10 +30,37 @@ export default CurriculumVitae;
 export const experienceQuery = graphql`
   query cvQuery {
     allStrapiExperience {
-      edges {
-        node {
+      nodes {
+        id
+        job_title
+        start_date(locale: "fr-FR")
+        end_date(locale: "fr-FR")
+        description
+        compagnie {
           id
-          job_title
+          name
+          web_site
+          location
+          logo {
+            id
+            url
+          }
+        }
+        collaborator {
+          id
+        }
+      }
+    }
+    allStrapiDiploma {
+      nodes {
+        id
+        title
+        Option
+        certification_date(locale: "fr-FR")
+        organisme {
+          id
+          location
+          name
         }
       }
     }
