@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import Img from 'gatsby-image';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { colors, mobileThresholdPixels, P } from './StyledComponents';
+import { colors, mobileThresholdPixels, P, ScrollingContainer } from './StyledComponents';
 import isMobile from '../services/isMobile';
 import ProjectCardDetails from './ProjectCardDetails';
 
@@ -17,28 +17,6 @@ const ProjectsContainer = styled.div`
   @media (max-width: ${mobileThresholdPixels}) {
     width: 100vw;
     height: 100vh;
-  }
-`;
-
-const ScrollingContainer = styled.div`
-  overflow: scroll;
-  width: 34vw;
-  height: 100vh;
-  scrollbar-width: none;
-  &::-webkit-scrollbar {
-    width: 5px;
-  }
-  &::-webkit-scrollbar-track {
-    background: ${colors.transparent}; 
-  }
-  &::-webkit-scrollbar-thumb {
-    background: ${colors.greenTransparency}; 
-  }
-  &::-webkit-scrollbar-thumb:hover {
-    background: ${colors.green}; 
-  }
-  &::-webkit-scrollbar-corner {
-    display: none;
   }
 `;
 

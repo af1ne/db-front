@@ -17,11 +17,19 @@ export const colors = {
 };
 
 export const fontSizes = {
-  xs: '1em',
-  s: '1.5em',
-  m: '2em',
-  l: '3em',
-  xl: '4em',
+  xs: '1rem',
+  s: '1.5rem',
+  m: '2rem',
+  l: '3rem',
+  xl: '4rem',
+};
+
+export const lineHeight = {
+  xs: '2rem',
+  s: '3rem',
+  m: '4rem',
+  l: '6rem',
+  xl: '8rem',
 };
 
 const greenFont = "Aclonica";
@@ -57,7 +65,6 @@ export const Title3 = styled.h3`
   color: ${colors.green};
   text-align: right;
   font-size: ${fontSizes.m};
-  
 
   @media (max-width: ${mobileThresholdPixels}) {
     font-size: ${fontSizes.s};
@@ -65,10 +72,10 @@ export const Title3 = styled.h3`
   }
 `;
 export const Date = styled.p`
-  font-family: ${greenFont};
-  color: ${colors.green};
+  font-family: ${whiteFont};
+  color: ${props => props.white ? `${colors.white}` : `${colors.green}`};
   text-align: right;
-  font-size: ${fontSizes.s};
+  font-size: ${props => props.xs ? `${fontSizes.xs}` : `${fontSizes.s}`};
   text-transform: capitalize;
 
   @media (max-width: ${mobileThresholdPixels}) {
@@ -91,7 +98,7 @@ export const Url = styled.p`
 export const A = styled.a`
   font-size: ${fontSizes.xs};
   text-decoration: none;
-  color: ${colors.green};
+  color: ${props => props.white ? `${colors.white}` : `${colors.green}`};
   transition: .3s ease-in-out;
 
   &:hover,
@@ -101,9 +108,10 @@ export const A = styled.a`
 `;
 
 export const P = styled.p`
-  font-family: ${whiteFont};
-  color: ${colors.white};
+  font-family: ${({ green }) => green ? `${greenFont}` : `${whiteFont}`};
+  color: ${({ green }) => green ? `${colors.green}` : `${colors.white}`};
   font-size: ${fontSizes.s};
+  line-height: ${props => props.xs ? `${lineHeight.xs}` : `${lineHeight.s}`}
   text-align: ${props => props.center ? 'center' : 'right'};
 
   @media (max-width: ${mobileThresholdPixels}) {
@@ -140,4 +148,26 @@ width: 50vw;
   padding-left: 1em;
   padding-right: 1em;
 }
+`;
+
+export const ScrollingContainer = styled.div`
+  overflow: scroll;
+  width: inherit;
+  height: inherit;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-track {
+    background: ${colors.transparent}; 
+  }
+  &::-webkit-scrollbar-thumb {
+    background: ${colors.greenTransparency}; 
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: ${colors.green}; 
+  }
+  &::-webkit-scrollbar-corner {
+    display: none;
+  }
 `;

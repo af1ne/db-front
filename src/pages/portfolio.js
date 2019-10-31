@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { graphql } from "gatsby";
 import { GlobalContainer, GreenContainer } from '../components/StyledComponents';
 import { FadeInDown} from 'animate-css-styled-components';
 import Layout from "../components/layout";
