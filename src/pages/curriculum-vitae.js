@@ -43,23 +43,33 @@ const Ul = styled.ul`
   flex-direction: column;
   justify-content: center;
 
-  transition: transform 0.5s ease-in-out;
-  background-color: blue;
+  transition: all 0.5s ease-in-out;
+  height : ${props => props.open ? '50vh' : '0vh'};
 `;
 
 const UlHiddenNiv1 = styled.ul`
-list-style-type: none;
-display: flex;
-flex-direction: column;
-justify-content: center;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
-transition: transform 0.5s ease-in-out;
-  transform: ${props => props.open ? 'translateY(0)' : 'translateY(-100%) scale(1, 0)'};
+
+  transform: ${props => props.open ? 'translateY(0)' : 'translateY(-150%)'};
+  
+  `;
+  // height : ${props => props.open ? 'auto' : '10vh'};
+
+//scale(1, 0)
+const HiddenScrollingContainer = styled(ScrollingContainer)`
+
+
 
 `;
+// transform: ${props => props.open ? 'translateY(0)' : 'translateY(-100%)'};
+// height : ${props => props.open ? 'auto' : '0vh'};
 
 const UlHiddenNiv2 = styled(Ul)`
-  transform: ${props => props.open ? 'translateY(0)' : 'translateY(-100%)'};
+  transform: ${props => props.open ? 'translateY(0)' : 'translateY(-150%)'};
 `;
 
 const Li = styled.li`
@@ -76,6 +86,7 @@ const Span = styled.span`
   vertical-align: super;
   cursor: pointer;
 `;
+
 
 
 const CurriculumVitae = ({ data }) => {
@@ -109,15 +120,19 @@ const CurriculumVitae = ({ data }) => {
             <Li>
               <MoreRotatif
                 open={openExperiences}
-                onClick={() => setOpenExperiences(!openExperiences) & setOpenWebDev(false) & setOpenAudiovisuel(false)}
+                // onClick={() => setOpenExperiences(!openExperiences) & setOpenWebDev(false) & setOpenAudiovisuel(false)}
               />
-              <Span onClick={() => setOpenExperiences(!openExperiences) & setOpenWebDev(false) & setOpenAudiovisuel(false)}>expériences</Span>
+              <Span 
+                // onClick={() => setOpenExperiences(!openExperiences) & setOpenWebDev(false) & setOpenAudiovisuel(false)}
+              >
+                expériences
+              </Span>
 
               <UlHiddenNiv1 open={openExperiences}>
                 <Li>
                   <MoreRotatif open={openWebDev} onClick={() => setOpenWebDev(!openWebDev) & setOpenAudiovisuel(false)} />
                   <Span onClick={() => setOpenWebDev(!openWebDev) & setOpenAudiovisuel(false)}>développement web</Span>
-                  <ScrollingContainer>
+                  <HiddenScrollingContainer open={openWebDev && openExperiences}>
                     <UlHiddenNiv2 open={openWebDev}>
                       {data.allStrapiExperience.nodes
                         .filter(experience => experience.job_title.includes(experience.job_title.match(devFilter)))
@@ -134,14 +149,14 @@ const CurriculumVitae = ({ data }) => {
                           </Li>
                         )}
                     </UlHiddenNiv2>
-                  </ScrollingContainer>
+                  </HiddenScrollingContainer>
                 </Li>
 
                 <Li>
                   <MoreRotatif open={openAudiovisuel} onClick={() => setOpenAudiovisuel(!openAudiovisuel) & setOpenWebDev(false)} />
                   <Span onClick={() => setOpenAudiovisuel(!openAudiovisuel) & setOpenWebDev(false)}>audiovisuel</Span>
                   <ScrollingContainer>
-                    <UlHiddenNiv2 open={openAudiovisuel}>
+                    <UlHiddenNiv2 open={openAudiovisuel && openExperiences}>
                       {data.allStrapiExperience.nodes
                         .filter(experience => !experience.job_title.includes(experience.job_title.match(devFilter)))
                         .map(experience =>
