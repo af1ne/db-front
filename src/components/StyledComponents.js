@@ -81,6 +81,7 @@ export const Date = styled.p`
   @media (max-width: ${mobileThresholdPixels}) {
     font-size: ${fontSizes.xs};
     text-align: left;
+    margin-bottom: 0;
   }
 `;
 export const Url = styled.p`

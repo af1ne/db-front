@@ -50,6 +50,7 @@ module.exports = {
           `diploma`,
           `experience`,
           `project`,
+          `techno`,
           `user`
         ],
         queryLimit: 1000,

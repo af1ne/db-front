@@ -7,21 +7,20 @@ import {
   mobileThresholdPixels,
   colors,
   fontSizes,
-  Title3,
   Date,
-  Url,
   P,
-  A } from './StyledComponents';
+  A
+} from './StyledComponents';
 
 const CardContainer = styled.div`
   color: ${colors.white};
   font-family: "Overlock";
-  font-size: ${fontSizes.s};
+  font-size: ${fontSizes.xs};
   width: 25vw;
   border-bottom: 1px solid ${colors.whiteTransparency};
 
   @media (max-width: ${mobileThresholdPixels}) {
-
+    width: 75vw;
   }
 `;
 
@@ -40,8 +39,8 @@ const JobTitle = styled(P)`
   text-align: left;
 `;
 
-const CvExperienceCard = ({
-  job_title,
+const CvCard = ({
+  title,
   start_date,
   end_date,
   compagnie,
@@ -51,14 +50,14 @@ const CvExperienceCard = ({
   <FadeIn>
     <CardContainer>
       <Row>
-        <JobTitle>{job_title}</JobTitle>
+        <JobTitle>{title}</JobTitle>
       </Row>
-      <Row>
+      {/* <Row>
         <div></div>
-      </Row>
+      </Row> */}
       <Row>
         <Date white xs>
-          {start_date === end_date
+          {(start_date === end_date) || start_date === ""
             ? `${end_date}`
             : `${start_date} à ${end_date}`
           }
@@ -78,18 +77,19 @@ const CvExperienceCard = ({
   </FadeIn>
 );
 
-CvExperienceCard.propTypes = {
-  job_title: PropTypes.string.isRequired,
-  start_date: PropTypes.string.isRequired,
+CvCard.propTypes = {
+  title: PropTypes.string.isRequired,
+  start_date: PropTypes.string,
   end_date: PropTypes.string.isRequired,
-  compagnie: PropTypes.shape({}).isRequired,
+  compagnie: PropTypes.string.isRequired,
   web_site: PropTypes.string,
   location: PropTypes.string,
 };
 
-CvExperienceCard.defaultProps = {
+CvCard.defaultProps = {
+  start_date: "",
   web_site: "",
   location: "",
 };
 
-export default CvExperienceCard;
+export default CvCard;

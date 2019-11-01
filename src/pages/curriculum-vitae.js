@@ -8,12 +8,13 @@ import {
   GreenContainer,
   fontSizes,
   ScrollingContainer,
+  P,
 } from '../components/StyledComponents';
 import Layout from '../components/layout';
 import GreenTitle from '../components/GreenTitle';
 import Identity from '../components/Identity';
 import isMobile from '../services/isMobile';
-import CvExperienceCard from '../components/CvExperienceCard';
+import CvCard from '../components/CvCard';
 import More from '../assets/expand_more.svg';
 
 const CVContainer = styled.div`
@@ -33,6 +34,7 @@ const CVContainer = styled.div`
     width: 100vw;
     height: 100vh;
     font-size: ${fontSizes.s};
+    overflow: scroll;
   }
 `;
 
@@ -43,33 +45,17 @@ const Ul = styled.ul`
   flex-direction: column;
   justify-content: center;
 
-  transition: all 0.5s ease-in-out;
-  height : ${props => props.open ? '50vh' : '0vh'};
+  transition: all 1s ease-in-out;
+  height: ${props => props.open ? 'auto' : '0vh'};
+  max-height: 50vh;
+
+  @media (max-width: ${mobileThresholdPixels}) {
+    
+  }
 `;
 
-const UlHiddenNiv1 = styled.ul`
-  list-style-type: none;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-
-  transform: ${props => props.open ? 'translateY(0)' : 'translateY(-150%)'};
-  
-  `;
-  // height : ${props => props.open ? 'auto' : '10vh'};
-
-//scale(1, 0)
-const HiddenScrollingContainer = styled(ScrollingContainer)`
-
-
-
-`;
-// transform: ${props => props.open ? 'translateY(0)' : 'translateY(-100%)'};
-// height : ${props => props.open ? 'auto' : '0vh'};
-
-const UlHiddenNiv2 = styled(Ul)`
-  transform: ${props => props.open ? 'translateY(0)' : 'translateY(-150%)'};
+const UlHidden = styled(Ul)`
+  transform: ${props => props.open ? 'translateY(0)' : 'translateY(-100%)'};
 `;
 
 const Li = styled.li`
@@ -77,7 +63,7 @@ const Li = styled.li`
 `;
 
 const MoreRotatif = styled(More)`
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.8s ease-in-out;
   transform: ${props => props.open ? 'rotate(0deg)' : 'rotate(-90deg)'};
   cursor: pointer;
 `;
@@ -85,9 +71,12 @@ const MoreRotatif = styled(More)`
 const Span = styled.span`
   vertical-align: super;
   cursor: pointer;
+
+  &:hover,
+  &:active {
+    color: ${colors.purple};
+  } 
 `;
-
-
 
 const CurriculumVitae = ({ data }) => {
   const [openExperiences, setOpenExperiences] = useState(true);
@@ -96,7 +85,7 @@ const CurriculumVitae = ({ data }) => {
   const [openTechno, setOpenTechno] = useState(false);
   const [openEnvironnementTravail, setOpenEnvironnementTravail] = useState(false);
   const [openEducation, setOpenEducation] = useState(false);
-
+  const [selectedItem, setSelectedItem] = useState(null);
   const devFilter = /d[eé]v/;
 
   return (
@@ -109,37 +98,47 @@ const CurriculumVitae = ({ data }) => {
               <Identity />
             )
           }
+          {selectedItem && !isMobile() &&
+            <P>TODO</P>
+          }
           <GreenTitle
             firstLine="Curriculum"
             secondLine="vitae"
           />
         </GreenContainer>
-
+{/* ************** */}
         <CVContainer>
           <Ul>
             <Li>
               <MoreRotatif
                 open={openExperiences}
-                // onClick={() => setOpenExperiences(!openExperiences) & setOpenWebDev(false) & setOpenAudiovisuel(false)}
+                onClick={() => setOpenExperiences(!openExperiences) & setOpenWebDev(false) & setOpenAudiovisuel(false) & setOpenEducation(false) & setOpenTechno(false) & setOpenEnvironnementTravail(false)}
               />
               <Span 
-                // onClick={() => setOpenExperiences(!openExperiences) & setOpenWebDev(false) & setOpenAudiovisuel(false)}
+                onClick={() => setOpenExperiences(!openExperiences) & setOpenWebDev(false) & setOpenAudiovisuel(false) & setOpenEducation(false) & setOpenTechno(false) & setOpenEnvironnementTravail(false)}
               >
                 expériences
               </Span>
 
-              <UlHiddenNiv1 open={openExperiences}>
+              {openExperiences && <UlHidden open={openExperiences}>
                 <Li>
-                  <MoreRotatif open={openWebDev} onClick={() => setOpenWebDev(!openWebDev) & setOpenAudiovisuel(false)} />
-                  <Span onClick={() => setOpenWebDev(!openWebDev) & setOpenAudiovisuel(false)}>développement web</Span>
-                  <HiddenScrollingContainer open={openWebDev && openExperiences}>
-                    <UlHiddenNiv2 open={openWebDev}>
+                  <MoreRotatif
+                    open={openWebDev}
+                    onClick={() => setOpenWebDev(!openWebDev) & setOpenAudiovisuel(false) & setOpenEducation(false) & setOpenTechno(false) & setOpenEnvironnementTravail(false)}
+                  />
+                  <Span
+                    onClick={() => setOpenWebDev(!openWebDev) & setOpenAudiovisuel(false) & setOpenEducation(false) & setOpenTechno(false) & setOpenEnvironnementTravail(false)}
+                  >
+                    développement web
+                  </Span>
+                  <ScrollingContainer open={openWebDev && openExperiences}>
+                    <UlHidden open={openWebDev}>
                       {data.allStrapiExperience.nodes
                         .filter(experience => experience.job_title.includes(experience.job_title.match(devFilter)))
                         .map(experience =>
-                          <Li key={experience.id}>
-                            <CvExperienceCard
-                              job_title={experience.job_title}
+                          <Li key={experience.id} onClick={() => setSelectedItem(experience.id)}>
+                            <CvCard
+                              title={experience.job_title}
                               start_date={experience.start_date}
                               end_date={experience.end_date}
                               compagnie={experience.compagnie.name}
@@ -148,21 +147,28 @@ const CurriculumVitae = ({ data }) => {
                             />
                           </Li>
                         )}
-                    </UlHiddenNiv2>
-                  </HiddenScrollingContainer>
+                    </UlHidden>
+                  </ScrollingContainer>
                 </Li>
 
                 <Li>
-                  <MoreRotatif open={openAudiovisuel} onClick={() => setOpenAudiovisuel(!openAudiovisuel) & setOpenWebDev(false)} />
-                  <Span onClick={() => setOpenAudiovisuel(!openAudiovisuel) & setOpenWebDev(false)}>audiovisuel</Span>
+                  <MoreRotatif
+                    open={openAudiovisuel}
+                    onClick={() => setOpenAudiovisuel(!openAudiovisuel) & setOpenWebDev(false) & setOpenEducation(false) & setOpenTechno(false) & setOpenEnvironnementTravail(false)}
+                  />
+                  <Span
+                    onClick={() => setOpenAudiovisuel(!openAudiovisuel) & setOpenWebDev(false) & setOpenEducation(false) & setOpenTechno(false) & setOpenEnvironnementTravail(false)}
+                  >
+                    audiovisuel
+                  </Span>
                   <ScrollingContainer>
-                    <UlHiddenNiv2 open={openAudiovisuel && openExperiences}>
+                    <UlHidden open={openAudiovisuel && openExperiences}>
                       {data.allStrapiExperience.nodes
                         .filter(experience => !experience.job_title.includes(experience.job_title.match(devFilter)))
                         .map(experience =>
-                          <Li key={experience.id}>
-                            <CvExperienceCard
-                              job_title={experience.job_title}
+                          <Li key={experience.id} onClick={() => setSelectedItem(experience.id)}>
+                            <CvCard
+                              title={experience.job_title}
                               start_date={experience.start_date}
                               end_date={experience.end_date}
                               compagnie={experience.compagnie.name}
@@ -171,21 +177,85 @@ const CurriculumVitae = ({ data }) => {
                             />
                           </Li>
                         )}
-                    </UlHiddenNiv2>
+                    </UlHidden>
                   </ScrollingContainer>
                 </Li>
-              </UlHiddenNiv1>
-
+              </UlHidden>
+              }
             </Li>
+{/* ************** */}
             <Li>
-              <MoreRotatif open={openTechno} onClick={() => setOpenTechno(!openTechno)} />
-              <Span onClick={() => setOpenTechno(!openTechno)}>mes technologies</Span></Li>
+              <MoreRotatif
+                open={openTechno}
+                onClick={() => setOpenTechno(!openTechno) & setOpenWebDev(false) & setOpenAudiovisuel(false) & setOpenEducation(false) & setOpenEnvironnementTravail(false)}
+              />
+              <Span
+                onClick={() => setOpenTechno(!openTechno) & setOpenWebDev(false) & setOpenAudiovisuel(false) & setOpenEducation(false) & setOpenEnvironnementTravail(false)}
+              >
+                mes technologies
+              </Span>
+              <ScrollingContainer open={openTechno}>
+                <UlHidden open={openTechno}>
+                  {data.allStrapiTechno.nodes.map(techno =>
+                  <Li key={techno.id}>
+                    <P>{techno.name}</P>
+                  </Li>
+                  )}
+                </UlHidden>
+              </ScrollingContainer>
+            </Li>
+{/* ************** */}
             <Li>
-              <MoreRotatif open={openEnvironnementTravail} onClick={() => setOpenEnvironnementTravail(!openEnvironnementTravail)} />
-              <Span onClick={() => setOpenEnvironnementTravail(!openEnvironnementTravail)}>environnement de travail</Span></Li>
+              <MoreRotatif
+                open={openEnvironnementTravail}
+                onClick={() => setOpenEnvironnementTravail(!openEnvironnementTravail) & setOpenWebDev(false) & setOpenAudiovisuel(false) & setOpenTechno(false) & setOpenEducation(false)}
+              />
+              <Span
+                onClick={() => setOpenEnvironnementTravail(!openEnvironnementTravail) & setOpenWebDev(false) & setOpenAudiovisuel(false) & setOpenTechno(false) & setOpenEducation(false)}
+              >
+                environnement de travail
+              </Span>
+              <ScrollingContainer open={openEnvironnementTravail}>
+                  <UlHidden open={openEnvironnementTravail} >
+                    <Li><P>Linux</P></Li>
+                    <Li><P>Windows</P></Li>
+                    <Li><P>Visual Studio Code</P></Li>
+                    <Li><P>Git</P></Li>
+                    <Li><P>Github</P></Li>
+                    <Li><P>Google suite</P></Li>
+                    <Li><P>Slack</P></Li>
+                    <Li><P>Trello</P></Li>
+                    <Li><P>Agile - scrum</P></Li>
+                    <Li><P>Adobe XD</P></Li>
+                    <Li><P>TDD</P></Li>
+                </UlHidden>
+              </ScrollingContainer>
+            </Li>
+{/* ************** */}
             <Li>
-              <MoreRotatif open={openEducation} onClick={() => setOpenEducation(!openEducation)} />
-              <Span onClick={() => setOpenEducation(!openEducation)}>éducation et diplomes</Span></Li>
+              <MoreRotatif
+                open={openEducation}
+                onClick={() => setOpenEducation(!openEducation) & setOpenWebDev(false) & setOpenAudiovisuel(false) & setOpenTechno(false) & setOpenEnvironnementTravail(false)}
+              />
+              <Span onClick={() => setOpenEducation(!openEducation) & setOpenWebDev(false) & setOpenAudiovisuel(false) & setOpenTechno(false) & setOpenEnvironnementTravail(false)}>
+                éducation et diplomes
+              </Span>
+              <ScrollingContainer open={openEducation}>
+                <UlHidden open={openEducation}>
+                  {data.allStrapiDiploma.nodes.map(diploma =>
+                    <Li key={diploma.id} onClick={() => setSelectedItem(diploma.id)}>
+                      <CvCard
+                        title={diploma.title}
+                        end_date={diploma.certification_date}
+                        compagnie={diploma.organisme.name}
+                        web_site={diploma.organisme.web_site}
+                        location={diploma.organisme.location}
+                      />
+                    </Li>
+                  )}
+                </UlHidden>
+              </ScrollingContainer>
+            </Li>
           </Ul>
         </CVContainer>
 
@@ -231,12 +301,27 @@ export const experienceQuery = graphql`
       nodes {
         id
         title
-        Option
-        certification_date(locale: "fr-FR")
+        certification_date(
+          formatString: "MMM YYYY"
+          locale: "fr-FR"
+        )
         organisme {
           id
           location
           name
+        }
+      }
+    }
+    allStrapiTechno {
+      nodes {
+        id
+        name
+        logo {
+          childImageSharp {
+            fixed(quality: 90, height: 40) {
+              ...GatsbyImageSharpFixed
+            }
+          }
         }
       }
     }
