@@ -268,7 +268,7 @@ export default CurriculumVitae;
 
 export const experienceQuery = graphql`
   query cvQuery {
-    allStrapiExperience {
+    allStrapiExperience(sort: {order: DESC, fields: end_date}) {
       nodes {
         id
         job_title
@@ -297,7 +297,7 @@ export const experienceQuery = graphql`
         }
       }
     }
-    allStrapiDiploma {
+    allStrapiDiploma(sort: {order: DESC, fields: certification_date}) {
       nodes {
         id
         title
@@ -312,7 +312,7 @@ export const experienceQuery = graphql`
         }
       }
     }
-    allStrapiTechno {
+    allStrapiTechno(sort: {order: ASC, fields: name}) {
       nodes {
         id
         name
